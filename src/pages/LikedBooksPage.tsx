@@ -27,7 +27,10 @@ export default function LikedBooksPage() {
         likedBooks.map((book: any, index: any) => {
           return (
             <div key={book.data.id} className='likedBooks'>
-              <Image src={book.data.image} alt={book.data.title} />
+              <Image
+                src={'https' + book.data.image.slice(4)}
+                alt={book.data.title}
+              />
               <h1>{book.data.title}</h1>
               <Button onClick={() => navigate(`/book/${book.data.id}`)}>
                 To the book page

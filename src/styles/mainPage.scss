@@ -110,4 +110,24 @@
       }
     }
   }
+  .navbar {
+    .signInBtn {
+      margin-right: 0.7em;
+      .userMenu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h2 {
+          text-align: center;
+          user-select: none;
+          color: var(--primaryFontColor);
+          margin: 0;
+          font-size: 0.7rem;
+        }
+        .userAvatar {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

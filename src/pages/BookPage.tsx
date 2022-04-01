@@ -32,7 +32,7 @@ export default function BookPage() {
         <Image
           width={300}
           alt={data.volumeInfo.title}
-          src={data.volumeInfo.imageLinks.thumbnail}
+          src={'https' + data.volumeInfo.imageLinks.thumbnail.slice(4)}
         />
       ) : (
         <h1>no image</h1>

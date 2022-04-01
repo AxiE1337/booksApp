@@ -29,7 +29,7 @@ export const MainPage = () => {
                   width={200}
                   preview={previewParams}
                   alt={item.volumeInfo.title}
-                  src={item.volumeInfo.imageLinks.thumbnail}
+                  src={'https' + item.volumeInfo.imageLinks.thumbnail.slice(4)}
                   onClick={() => navigate(`/book/${item.id}`)}
                 />
                 <Popover content={<div>{item.volumeInfo.title}</div>}>

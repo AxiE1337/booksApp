@@ -1,0 +1,21 @@
+:root {
+  --primaryColor: rgb(255, 255, 255);
+  --secondaryColor: white;
+  --aditionalColor: #ffffff;
+  --pirmatyFontColor: white;
+  --secondaryFontColor: black;
+}
+[data-theme='light'] {
+  --primaryColor: rgb(255, 255, 255);
+  --secondaryColor: #00203fff;
+  --aditionalColor: white;
+  --pirmatyFontColor: #00203fff;
+  --secondaryFontColor: #202124;
+}
+[data-theme='dark'] {
+  --primaryColor: #111d2c;
+  --secondaryColor: #112a45;
+  --aditionalColor: #15395b;
+  --primaryFontColor: #b7e3fa;
+  --secondaryFontColor: #65b7f3;
+}

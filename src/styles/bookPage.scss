@@ -1,0 +1,31 @@
+.bookPage {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--primaryColor);
+  h1,
+  p {
+    color: var(--primaryFontColor);
+  }
+  .ant-collapse {
+    background-color: var(--primaryColor);
+    .ant-collapse-header {
+      color: var(--primaryFontColor);
+    }
+    .ant-collapse-content {
+      background-color: var(--primaryColor);
+    }
+  }
+  button {
+    background-color: var(--primaryColor);
+    border: 1px solid var(--secondaryColor);
+    color: var(--primaryFontColor);
+  }
+  button:hover {
+    background-color: var(--aditionalColor);
+  }
+}

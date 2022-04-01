@@ -1,0 +1,113 @@
+.mainPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primaryColor);
+  .booksContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .books {
+    min-height: 90vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    margin-top: 0.5em;
+    .book {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 6em;
+      .ant-image-mask-info {
+        display: none;
+      }
+      h1 {
+        color: var(--primaryFontColor);
+        font-size: 1rem;
+        max-height: 3em;
+        cursor: pointer;
+        text-align: center;
+        overflow: hidden;
+      }
+      .saleInfo {
+        cursor: default;
+        user-select: none;
+      }
+    }
+  }
+}
+.loading {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3em;
+  background: var(--aditionalColor);
+  .ant-input-group-wrapper {
+    background: var(--aditionalColor);
+    input {
+      background: var(--aditionalColor);
+      border: 1px solid var(--secondaryColor);
+    }
+    span {
+      background: var(--aditionalColor);
+    }
+    button {
+      span {
+        color: var(--primaryFontColor);
+      }
+      background: var(--aditionalColor);
+      border: 1px solid var(--secondaryColor);
+    }
+  }
+  .signInBtn {
+    margin-left: auto;
+    margin-right: 1em;
+    .userMenu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h2 {
+        user-select: none;
+        color: var(--primaryFontColor);
+        margin: 0;
+        padding-right: 0.5em;
+      }
+      .userAvatar {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+@media screen and (max-width: 500px) {
+  .mainPage {
+    .books {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .book {
+        h1 {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

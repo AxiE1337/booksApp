@@ -1,0 +1,16 @@
+.settings {
+  min-height: 100vh;
+  h1,
+  p {
+    color: var(--primaryFontColor);
+  }
+  span {
+    color: var(--primaryFontColor);
+  }
+  .ant-checkbox-inner {
+    background-color: var(--aditionalColor);
+  }
+  button {
+    background-color: var(--aditionalColor);
+  }
+}

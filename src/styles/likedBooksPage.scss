@@ -1,0 +1,32 @@
+.likedBooks {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 1em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.226);
+  border-radius: 10px;
+  background: var(--primaryColor);
+  button {
+    background-color: var(--aditionalColor);
+    border: 1px solid var(--aditionalColor);
+    span {
+      color: var(--primaryFontColor);
+    }
+  }
+  button:hover {
+    background-color: var(--primaryColor);
+  }
+  h1 {
+    color: var(--primaryFontColor);
+  }
+  p {
+    user-select: none;
+    color: var(--primaryFontColor);
+  }
+}

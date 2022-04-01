@@ -1,0 +1,37 @@
+.books {
+  min-height: 90vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  margin-top: 0.5em;
+  .book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6em;
+    .ant-image-mask-info {
+      display: none;
+    }
+    h1 {
+      font-size: 1rem;
+      max-height: 3em;
+      cursor: pointer;
+      text-align: center;
+      overflow: hidden;
+    }
+    .saleInfo {
+      cursor: default;
+      user-select: none;
+    }
+  }
+}
+.booksNotFound {
+  min-height: 90vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  text-align: center;
+}

@@ -1,0 +1,21 @@
+@import './variables.css';
+@import 'antd/dist/antd.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.App {
+  background: var(--primaryColor);
+}
+::-webkit-scrollbar {
+  width: 0.6em;
+}
+::-webkit-scrollbar-track {
+  background: var(--primaryColor);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background: #202124;
+}

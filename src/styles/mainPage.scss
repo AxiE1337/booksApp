@@ -58,6 +58,7 @@
     input {
       background: var(--aditionalColor);
       border: 1px solid var(--secondaryColor);
+      color: var(--primaryFontColor);
     }
     span {
       background: var(--aditionalColor);
@@ -81,7 +82,7 @@
         user-select: none;
         color: var(--primaryFontColor);
         margin: 0;
-        padding-right: 0.5em;
+        padding: 0 0.5em;
       }
       .userAvatar {
         cursor: pointer;

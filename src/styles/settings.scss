@@ -1,16 +1,49 @@
 .settings {
   min-height: 100vh;
+  text-align: center;
+  .sideMenuSettings {
+    border: 1px solid var(--secondaryColor);
+    padding: 0.5em;
+    h1 {
+      border-radius: 10px;
+    }
+    .ant-checkbox-inner {
+      background-color: var(--secondaryBtnColor);
+    }
+    button {
+      margin-top: 0.4em;
+    }
+  }
+  .themeSwither {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    border: 1px solid var(--secondaryColor);
+    padding: 0.5em;
+    div {
+      display: flex;
+      align-items: center;
+      justify-self: center;
+    }
+    p {
+      padding-left: 0.5em;
+      margin: 0;
+    }
+    button {
+      background-color: var(--secondaryColor);
+    }
+  }
   h1,
   p {
+    user-select: none;
     color: var(--primaryFontColor);
+  }
+  button {
+    color: var(--primaryFontColor);
+    background-color: var(--primaryBtnColor);
   }
   span {
     color: var(--primaryFontColor);
-  }
-  .ant-checkbox-inner {
-    background-color: var(--aditionalColor);
-  }
-  button {
-    background-color: var(--aditionalColor);
   }
 }

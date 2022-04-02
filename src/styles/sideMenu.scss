@@ -1,28 +1,22 @@
-.ant-drawer-wrapper-body {
-  background: black;
-  .ant-drawer-header {
-    background: var(--primaryColor);
-    div,
-    span {
-      color: var(--primaryFontColor);
-    }
+.ant-drawer-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: max-content;
+  background: var(--primaryColor);
+  button {
+    color: var(--primaryFontColor);
+    background: var(--primaryBtnColor);
+    border: 1px solid var(--aditionalBtnColor);
   }
-  .ant-drawer-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: max-content;
-    background: var(--primaryColor);
-    button {
-      color: var(--primaryFontColor);
-      background: var(--primaryColor);
-      border: 1px solid var(--secondaryColor);
-    }
-    .settingsBtn {
-      margin-top: auto;
-      width: max-content;
-      background-color: var(--primarylColor);
-      border: 1px solid var(--secondaryColor);
-    }
+  button:hover {
+    background: var(--primaryBtnColor);
+    color: var(--primaryFontColor);
+  }
+  .settingsBtn {
+    margin-top: auto;
+    width: max-content;
+    background-color: var(--primarylColor);
+    border: 1px solid var(--secondaryColor);
   }
 }

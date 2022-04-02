@@ -28,7 +28,9 @@ export default function useFetchLikedBooks() {
   const likeBook = async (
     bookId: string,
     bookTitle: string,
-    bookImage: string
+    bookImage: string,
+    authors: any,
+    time: number
   ) => {
     const isLiked = likedBooks.some((book: any) => book.data.id === bookId)
     if (!isLiked) {
@@ -38,6 +40,8 @@ export default function useFetchLikedBooks() {
           title: bookTitle,
           id: bookId,
           image: bookImage,
+          authors: authors,
+          time: time,
         })
       } catch (err: any) {
         console.log(err.message)
@@ -53,7 +57,7 @@ export default function useFetchLikedBooks() {
     }
   }
   useEffect(() => {
-    fetchBooks(userData.userUid)
+    fetchBooks(userData.userUid || '0')
   }, [userData.userUid])
   return { likedBooks, isFetching, unlinkBook, likeBook }
 }

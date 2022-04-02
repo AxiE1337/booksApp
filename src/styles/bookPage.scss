@@ -7,6 +7,7 @@
   flex-direction: column;
   text-align: center;
   background-color: var(--primaryColor);
+  padding-top: 0.5em;
   h1,
   p {
     color: var(--primaryFontColor);
@@ -21,9 +22,10 @@
     }
   }
   button {
-    background-color: var(--primaryColor);
-    border: 1px solid var(--secondaryColor);
+    background-color: var(--primaryBtnColor);
+    border: 1px solid var(--aditionalBtnColor);
     color: var(--primaryFontColor);
+    margin: 0.4em;
   }
   button:hover {
     background-color: var(--aditionalColor);

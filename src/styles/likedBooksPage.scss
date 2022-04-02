@@ -6,15 +6,17 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  margin-top: 1em;
   padding-right: 0.5em;
   padding-left: 0.5em;
-  border: 1px solid rgba(0, 0, 0, 0.226);
-  border-radius: 10px;
+  border: 1px solid var(--secondaryColor);
   background: var(--primaryColor);
+  time {
+    color: var(--primaryFontColor);
+  }
   button {
-    background-color: var(--aditionalColor);
-    border: 1px solid var(--aditionalColor);
+    background-color: var(--primaryBtnColor);
+    border: 1px solid var(--aditionalBtnColor);
+    margin: 0.4em;
     span {
       color: var(--primaryFontColor);
     }

@@ -11,10 +11,20 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 6em;
+    .ant-image {
+      img {
+        border-radius: 10px;
+      }
+      .ant-image-mask {
+        border-radius: 10px;
+      }
+    }
     .ant-image-mask-info {
       display: none;
     }
     h1 {
+      margin-top: 0.5em;
+      color: var(--primaryFontColor);
       font-size: 1rem;
       max-height: 3em;
       cursor: pointer;

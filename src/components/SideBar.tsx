@@ -4,12 +4,10 @@ import { Drawer, Button, Space } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { MenuOutlined, SettingOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
-import useAuth from '../hooks/useAuth'
 
 export default function SideBar() {
   const [visible, setVisible] = useState(false)
   const [isHover, setIsHover] = useState<boolean>(false)
-  const { isLoggedIn } = useAuth()
   const settings = useSelector((state: any) => state.settings.value)
   const navigate = useNavigate()
 
@@ -67,17 +65,6 @@ export default function SideBar() {
           >
             Paid ebooks
           </Button>
-          {isLoggedIn && (
-            <Button
-              type='primary'
-              onClick={() => {
-                navigate(`/likedBooks`)
-                onClose()
-              }}
-            >
-              Liked Books
-            </Button>
-          )}
         </Space>
         <Button
           type='default'

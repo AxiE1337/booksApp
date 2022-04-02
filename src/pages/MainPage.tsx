@@ -18,6 +18,7 @@ export const MainPage = () => {
   if (error !== '') {
     return <Error text={error} />
   }
+
   return (
     <div className='mainPage'>
       <div className='books'>

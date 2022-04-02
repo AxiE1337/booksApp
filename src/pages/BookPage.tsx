@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Loading from '../components/Loading'
 import useFetchBook from '../hooks/useFetchBook'
 import useFetchLikedBooks from '../hooks/useFetchLikedBooks'
@@ -6,22 +7,34 @@ import { useSelector } from 'react-redux'
 import '../styles/bookPage.css'
 
 export default function BookPage() {
+  const [isLiked, setIsLiked] = useState<boolean>(false)
   const userData = useSelector((state: any) => state.userData?.value)
   const { data, isFetching } = useFetchBook()
   const { likeBook, likedBooks } = useFetchLikedBooks()
   const { Panel } = Collapse
   const isForSale = data.saleInfo?.saleability
-  const isLiked = likedBooks?.some((book: any) => book.data.id === data.id)
 
-  const addbook = (bookId: string, bookTitle: string, bookImage: string) => {
+  useEffect(() => {
+    if (!isFetching) {
+      setIsLiked(likedBooks?.some((book: any) => book.data.id === data.id))
+    }
+  }, [isFetching, likedBooks, data.id])
+
+  const addbook = (
+    bookId: string,
+    bookTitle: string,
+    bookImage: string,
+    authors: any
+  ) => {
+    setIsLiked(true)
+    let time = Date.now()
     if (!isLiked) {
       notification.open({
         message: 'Book added to liked',
       })
     }
-    likeBook(bookId, bookTitle, bookImage)
+    likeBook(bookId, bookTitle, bookImage, authors, time)
   }
-  const panelHandler = () => {}
   if (isFetching) {
     return <Loading />
   }
@@ -37,26 +50,32 @@ export default function BookPage() {
       ) : (
         <h1>no image</h1>
       )}
-
-      <h1>{data.volumeInfo.authors}</h1>
-      <p>{'Publish date ' + data.volumeInfo.publishedDate}</p>
-      <p>{data.volumeInfo.publisher}</p>
+      <h1>{data.volumeInfo.title}</h1>
+      <p>
+        {`Author${data.volumeInfo?.authors?.length > 1 ? 's:' : ':'} ` +
+          data.volumeInfo?.authors}
+      </p>
+      <p>{'Publish date: ' + data.volumeInfo.publishedDate}</p>
+      <p>{'Publisher ' + data.volumeInfo.publisher}</p>
+      <p>{'Pages: ' + data.volumeInfo.pageCount}</p>
       {data.volumeInfo.description !== undefined && (
-        <Collapse onChange={panelHandler}>
+        <Collapse>
           <Panel header='description' key='1'>
             <p>{data.volumeInfo.description}</p>
           </Panel>
         </Collapse>
       )}
-      <h1>{data.volumeInfo.title}</h1>
-      <h1>
-        {isForSale !== 'NOT_FOR_SALE'
-          ? data.saleInfo.listPrice?.amount +
-            ' ' +
-            data.saleInfo.listPrice?.currencyCode
-          : 'Not for sale'}
-      </h1>
-
+      {isForSale !== 'FREE' ? (
+        <h1>
+          {isForSale !== 'NOT_FOR_SALE'
+            ? data.saleInfo.listPrice?.amount +
+              ' ' +
+              data.saleInfo.listPrice?.currencyCode
+            : 'Not for sale'}
+        </h1>
+      ) : (
+        <h1>{isForSale + ' book'}</h1>
+      )}
       {userData.userUid === null ? (
         <h1>Log in to like the book</h1>
       ) : (
@@ -67,7 +86,8 @@ export default function BookPage() {
             addbook(
               data.id,
               data.volumeInfo.title,
-              data.volumeInfo.imageLinks?.thumbnail || null
+              data.volumeInfo.imageLinks?.thumbnail || null,
+              data.volumeInfo?.authors
             )
           }
         >

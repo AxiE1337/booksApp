@@ -2,20 +2,35 @@
   --primaryColor: rgb(255, 255, 255);
   --secondaryColor: white;
   --aditionalColor: #ffffff;
+
   --pirmatyFontColor: white;
   --secondaryFontColor: black;
+
+  --primaryBtnColor: white;
+  --secondaryBtnColor: white;
+  --aditionalBtnColor: #111d2c;
 }
 [data-theme='light'] {
   --primaryColor: rgb(255, 255, 255);
   --secondaryColor: #00203fff;
   --aditionalColor: white;
+
   --pirmatyFontColor: #00203fff;
   --secondaryFontColor: #202124;
+
+  --primaryBtnColor: white;
+  --secondaryBtnColor: #65b7f3;
+  --aditionalBtnColor: #111d2c;
 }
 [data-theme='dark'] {
   --primaryColor: #111d2c;
   --secondaryColor: #112a45;
   --aditionalColor: #15395b;
+
   --primaryFontColor: #b7e3fa;
   --secondaryFontColor: #65b7f3;
+
+  --primaryBtnColor: #15395b;
+  --secondaryBtnColor: #111d2c;
+  --aditionalBtnColor: #112a45;
 }

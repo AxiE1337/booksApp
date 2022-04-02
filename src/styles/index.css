@@ -1,5 +1,6 @@
 @import './variables.css';
 @import 'antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 * {
   margin: 0;
@@ -8,6 +9,7 @@
 }
 .App {
   background: var(--primaryColor);
+  font-family: 'Roboto', sans-serif;
 }
 ::-webkit-scrollbar {
   width: 0.6em;
@@ -16,6 +18,5 @@
   background: var(--primaryColor);
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: 15px;
   background: #202124;
 }

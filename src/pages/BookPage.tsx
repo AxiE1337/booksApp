@@ -98,7 +98,7 @@ export default function BookPage() {
       {isForSale !== 'NOT_FOR_SALE' && (
         <Button type='default'>
           <a href={data.saleInfo.buyLink} target='_blank' rel='noreferrer'>
-            Buy
+            Get
           </a>
         </Button>
       )}

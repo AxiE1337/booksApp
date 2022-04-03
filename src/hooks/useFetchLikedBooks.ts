@@ -40,7 +40,7 @@ export default function useFetchLikedBooks() {
           title: bookTitle,
           id: bookId,
           image: bookImage,
-          authors: authors,
+          authors: authors || 'No author',
           time: time,
         })
       } catch (err: any) {

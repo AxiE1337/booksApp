@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import Loading from '../components/Loading'
 import useFetchBook from '../hooks/useFetchBook'
 import useFetchLikedBooks from '../hooks/useFetchLikedBooks'
-import { Image, Button, notification, Collapse } from 'antd'
+import { Snackbar } from '@mui/material'
+import { Image, Button, Collapse } from 'antd'
 import { useSelector } from 'react-redux'
 import '../styles/bookPage.css'
 
 export default function BookPage() {
   const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [notification, setNotification] = useState<boolean>(false)
   const userData = useSelector((state: any) => state.userData?.value)
   const { data, isFetching } = useFetchBook()
   const { likeBook, likedBooks } = useFetchLikedBooks()
@@ -20,6 +22,13 @@ export default function BookPage() {
     }
   }, [isFetching, likedBooks, data.id])
 
+  const handleCloseNotification = (reason: any) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setNotification(false)
+  }
+
   const addbook = (
     bookId: string,
     bookTitle: string,
@@ -29,9 +38,7 @@ export default function BookPage() {
     setIsLiked(true)
     let time = Date.now()
     if (!isLiked) {
-      notification.open({
-        message: 'Book added to liked',
-      })
+      setNotification(true)
     }
     likeBook(bookId, bookTitle, bookImage, authors, time)
   }
@@ -102,6 +109,12 @@ export default function BookPage() {
           </a>
         </Button>
       )}
+      <Snackbar
+        open={notification}
+        autoHideDuration={2500}
+        onClose={handleCloseNotification}
+        message='Book added to liked'
+      />
     </div>
   )
 }

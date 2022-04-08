@@ -1,20 +1,31 @@
 import { useState } from 'react'
 import '../styles/settings.css'
-import { Drawer, Button, Slider, message, Checkbox, Switch } from 'antd'
+import { Drawer, Button, Checkbox, Switch } from 'antd'
+import { Snackbar, Slider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSetting, theme } from '../redux/slices/settings'
 export default function Settings() {
   const [visible, setVisible] = useState(false)
   const [menuPosition, setMenuPosition] = useState<any>('left')
   const [sliderValue, setSliderValue] = useState<number>(30)
+  const [notification, setNotification] = useState<any>({
+    isOpen: false,
+    message: '',
+  })
   const themeState = useSelector((state: any) => state.settings.theme)
   const dispatch = useDispatch()
 
+  const handleCloseNotification = (reason: any) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setNotification(false)
+  }
   const onClose = () => {
     setVisible(false)
   }
-  const slider = (value: any) => {
-    setSliderValue(value)
+  const slider = (newValue: any) => {
+    setSliderValue(newValue)
   }
   const save = () => {
     let obj = {
@@ -22,12 +33,18 @@ export default function Settings() {
       menuWidth: sliderValue,
     }
     dispatch(setSetting(obj))
-    message.info('saved')
+    setNotification({
+      isOpen: true,
+      message: `Menu position: ${menuPosition}, Menu width: ${sliderValue}.  Changes saved`,
+    })
   }
 
   const themeFunction = () => {
     dispatch(theme())
-    message.info(`Theme changed to ${themeState}`)
+    setNotification({
+      isOpen: true,
+      message: `Theme changed to ${themeState === 'dark' ? 'light' : 'dark'}`,
+    })
   }
 
   const positionSet = (position: string) => {
@@ -41,9 +58,16 @@ export default function Settings() {
 
       <div className='sideMenuSettings'>
         <h1>Side menu settings</h1>
-        <p>Menu width</p>
-        <Slider onChange={slider} value={sliderValue} />
-        <p>Menu position</p>
+        <p>Menu width:</p>
+        <Slider
+          min={15}
+          max={100}
+          value={sliderValue}
+          onChange={(e: any) => slider(e.target.value)}
+          size='small'
+          valueLabelDisplay='auto'
+        />
+        <p>Menu position:</p>
         <Checkbox
           onClick={() => positionSet('left')}
           checked={menuPosition === 'left' ? true : false}
@@ -90,6 +114,12 @@ export default function Settings() {
           <p>{themeState + ' theme'}</p>
         </div>
       </div>
+      <Snackbar
+        open={notification.isOpen}
+        autoHideDuration={3500}
+        onClose={handleCloseNotification}
+        message={notification.message}
+      />
     </div>
   )
 }

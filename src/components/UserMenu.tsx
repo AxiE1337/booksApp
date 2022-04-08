@@ -1,39 +1,61 @@
-import { Avatar, Menu, Dropdown, Button } from 'antd'
+import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Button, Menu, MenuItem, Avatar } from '@mui/material'
 
 export default function UserMenu() {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
   const { authenticationFunc } = useAuth()
   const navigate = useNavigate()
   const userData = useSelector((state: any) => state.userData.value)
-  const menu = (
-    <Menu>
-      <Menu.Item key='1'>
-        <Button
-          type='default'
-          onClick={() => {
-            navigate(`/likedBooks`)
-          }}
-        >
-          Liked Books
-        </Button>
-      </Menu.Item>
-      <Menu.Item key='2'>
-        <Button type='default' onClick={authenticationFunc}>
-          Log out
-        </Button>
-      </Menu.Item>
-    </Menu>
-  )
+
+  const handleClick = (e: any) => {
+    setAnchorEl(e.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <div className='userMenu'>
       <h2 style={{ cursor: 'default', textAlign: 'center' }}>
         {userData.userName}
       </h2>
-      <Dropdown overlay={menu} trigger={['click']}>
-        <Avatar size={35} className='userAvatar' src={userData.userPhoto} />
-      </Dropdown>
+      <Button id='basic-button' aria-haspopup='true' onClick={handleClick}>
+        <Avatar
+          className='userAvatar'
+          alt={userData.userName}
+          src={userData.userPhoto}
+        />
+      </Button>
+      <Menu
+        id='menu'
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem
+          onClick={() => {
+            handleClose()
+            navigate(`/likedBooks`)
+          }}
+        >
+          Liked books
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose()
+            authenticationFunc()
+          }}
+        >
+          Logout
+        </MenuItem>
+      </Menu>
     </div>
   )
 }

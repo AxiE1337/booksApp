@@ -1,4 +1,6 @@
-import { Button, Empty, Image, Popconfirm, message } from 'antd'
+import { useState } from 'react'
+import { Button, Empty, Image } from 'antd'
+import { Snackbar, Dialog, DialogActions, DialogTitle } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import Moment from 'react-moment'
 import useFetchLikedBooks from '../hooks/useFetchLikedBooks'
@@ -6,16 +8,38 @@ import Loading from '../components/Loading'
 import '../styles/likedBooksPage.css'
 
 export default function LikedBooksPage() {
+  const [notification, setNotification] = useState<any>({
+    isOpen: false,
+    message: '',
+  })
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [dialogMessage, setDialogMessage] = useState<any>({})
   const { isFetching, likedBooks, unlinkBook } = useFetchLikedBooks()
   const navigate = useNavigate()
 
-  function confirm(id: string) {
-    unlinkBook(id)
-    message.success('Confirmed')
+  const openPopUp = (bookId: string, bookTitle: string) => {
+    setDialogMessage({ bookId: bookId, title: bookTitle })
+    setIsOpen(true)
+  }
+
+  const closePopUp = () => {
+    setIsOpen(false)
+  }
+
+  function confirm() {
+    unlinkBook(dialogMessage.bookId)
+    setIsOpen(false)
   }
 
   function cancel() {
-    message.error('cancelled')
+    setIsOpen(false)
+  }
+
+  const handleCloseNotification = (reason: any) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setNotification(false)
   }
 
   if (isFetching) {
@@ -44,15 +68,23 @@ export default function LikedBooksPage() {
                 <Button onClick={() => navigate(`/book/${book.data.id}`)}>
                   To the book page
                 </Button>
-                <Popconfirm
-                  title='Unlike this book?'
-                  onConfirm={() => confirm(book.id)}
-                  onCancel={cancel}
-                  okText='Yes'
-                  cancelText='No'
+                <Button onClick={() => openPopUp(book.id, book.data.title)}>
+                  unlink book
+                </Button>
+                <Dialog
+                  open={isOpen}
+                  onClose={closePopUp}
+                  aria-labelledby='alert-dialog-title'
+                  aria-describedby='alert-dialog-description'
                 >
-                  <Button>Unlike</Button>
-                </Popconfirm>
+                  <DialogTitle id='alert-dialog-title'>
+                    {`Unlike '${dialogMessage.title}' book ?`}
+                  </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={confirm}>Yes</Button>
+                    <Button onClick={cancel}>No</Button>
+                  </DialogActions>
+                </Dialog>
                 <Moment fromNow>{book.data.time}</Moment>
               </div>
             )
@@ -62,6 +94,12 @@ export default function LikedBooksPage() {
           <Empty />
         </div>
       )}
+      <Snackbar
+        open={notification.isOpen}
+        autoHideDuration={2500}
+        onClose={handleCloseNotification}
+        message={notification.message}
+      />
     </div>
   )
 }

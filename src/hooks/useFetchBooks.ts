@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+const APIKEY: string = process.env.REACT_APP_API_KEY || ''
 
 export default function useFetchBooks() {
   const paramsPage = useParams()
@@ -9,12 +10,19 @@ export default function useFetchBooks() {
   const [error, setError] = useState<string>('')
 
   const fetchBooks = async (page: any, filter: any) => {
+    const url =
+      'https://www.googleapis.com/books/v1/volumes?q=time&printType=books'
     setIsFetching(true)
-    filter = paramsPage.filter ? `&filter=${paramsPage.filter}` : ''
     try {
-      const data = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=time&printType=books&startIndex=${page}${filter}&key=${process.env.REACT_APP_API_KEY}`
-      )
+      const data = await axios(url, {
+        headers: {
+          authorization: APIKEY,
+        },
+        params: {
+          startIndex: page,
+          filter: filter,
+        },
+      })
       setData(data.data)
       data.data.items === undefined &&
         setError(`Page ${paramsPage.page || ''} doest exist `)
